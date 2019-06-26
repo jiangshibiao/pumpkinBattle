@@ -5,31 +5,32 @@
 **刘明锐——3170105696**
 **罗炜程——3170105902**
 **王宇晗——3170106051**
-**提交日期：2019-06-24**
+**提交日期：2019-06-25**
 
 ## 一、概述
 
-本次我们的图形学大作业做的是一个基于OpenGL的单人FPS游戏，实现了以下几点要求
+本次我们的图形学大作业做的是一个基于现代OpenGL的单人FPS游戏 **pumpkinBattle**。以下是我们达到的要点：
 
 + 基本要求
-	- 体素表达
-		+ 中间的球、圆柱、圆锥
+	- 基本体素表达
+		+ 场景中间的球、圆柱、圆锥
 	- obj的导入
 		+ 静态位置（星球）
 		+ 实时位置（手榴弹瞄准）
 		+ 动态位置（子弹的飞行）
 	- 纹理
 		+ 制造（中间的体素）
-		+ 贴图（天空盒）
+		+ 贴图（墙和天空盒）
 	- 几何变换
-		+ 南瓜与人距离越近的时候，越会面向人走过来
+		+ 南瓜与人距离越近的时候，越会面向人走过来（旋转、平移）
+		+ 对场景里的物体有一定的平移、缩放
 	- 光照
-		+ 点光源
-		+ 动态变化
+		+ 实现了点光源
+		+ 实现了点光源随时间的动态变化
 	- 漫游
-		+ 按鼠标和WASD进行移动
+		+ 按鼠标和 `WASD` 进行移动
 		+ 空格进行跳跃
-		+ 回车复活
+		+ 按回车复活
 	- 动画和截屏
 		+ 胜利后升天的动画
 		+ 按 P 截屏
@@ -40,12 +41,15 @@
 		+ 人碰到墙/图形被阻挡
 		+ 人打破墙会越过墙。
 	- 阴影
-		+ 实时阴影检测
+		+ 实时根据场景物体产生深度图
+		+ 实时阴影体现
 	- 游戏性
+		+ 可以用手榴弹炸墙，来穿过去躲避南瓜
+		+ 可以对南瓜开枪来打死它
 		+ 显示剩余南瓜数量
-		+ 胜利时打出 you win 并有升天效果
+		+ 击败所有南瓜时胜利，打出 you win 并有升天效果
 		+ 可以按回车复活
-	- 对象表达能力（）
+	- 对象表达能力（墙）
 		+ 墙的破坏（右键）
 		+ 人遇到墙会阻挡
 		+ 跳过墙或穿过墙
@@ -56,7 +60,7 @@
 		+ 空格键跳跃，回车键复活
 		+ 可以跳着过墙
 	- 打中南瓜后，南瓜会变红一会
-	- 子弹多次打中南瓜，南瓜会消失
+	- 子弹多次打中南瓜，南瓜会消失，文字中显示的南瓜数量减一
 
 ## 二、技术要点
 #### 1. 基本体素的表达与绘制流程
@@ -67,7 +71,7 @@
     	+ 如图所示，通过在经度和维度方向上间隔一定角度采样，按照图中的方式将点相连就可以得到三角形。
     	+ 贴图时，将图中割出的方形小块贴上一个正方形贴图即可。
 
-	![](drawsphere.jpg "markdown" "width:800px")
+	![](drawsphere.jpg "markdown" "width:600px")
 
 	```cpp
         const int sphereprec = 15;
@@ -590,7 +594,8 @@
 #### 7. 屏幕截图与加载文字
 
 + 截图的主要功能函数
-	- `openGL` 提供强大的函数 `glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, screenData);` 分别表示截取的四个顶点位置，图片的色彩格式，保存数据的类型，保存到的数组首地址。
+	- `openGL` 提供强大的函数 `glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, screenData);`
+	- 分别表示截取的四个顶点位置，图片的色彩格式，保存数据的类型，保存到的数组首地址。
 
 + 截图函数的实现
 	- 在 `screenshort.h` 里要提供一个对外接口 `screeshot(width, height)`，接受屏幕大小，并将结果储存到一个指定的文件里。
@@ -624,6 +629,7 @@
         }
     ```
     - 最后，我们把这个函数关联到主程序的一个按键即可。
+
 + 文字绘制的环境配置
 	- 在 `openGL` 里绘制文字不是一件简单的事情。
 	- 首先我们要在库文件里加入 `freetype` 文件夹，在链接文件里加入 `freetyped.lib`，然后主程序里加入如下代码；
@@ -690,7 +696,9 @@
         }
     ```
 + 文字的渲染
-	- 为了增强可拓展性，我们要对外提供这么一个接口：`RenderText(Shader &shader, unsigned int &VAO, unsigned int &VBO, std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color)`。`text` 表示渲染的文字内容，`x,y,scale` 表示字体的位置和大小，`color` 表示字体的颜色。
+	- 为了增强可拓展性，我们要对外提供这么一个接口：
+	- `RenderText(Shader &shader, unsigned int &VAO, unsigned int &VBO, std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color)`。
+	- `text` 表示渲染的文字内容，`x,y,scale` 表示字体的位置和大小，`color` 表示字体的颜色。
     - 渲染的时候，注意还要打开开关：
     ```cpp
         glEnable(GL_CULL_FACE);
@@ -783,60 +791,63 @@
 
     - 这里以与墙的碰撞为例
 
-```cpp
-    for (Wall *pwall : WallManager) {
-        int siz = pwall->allface.size();
+    ```cpp
+        for (Wall *pwall : WallManager) {
+            int siz = pwall->allface.size();
 
-        vector< pair<double, Point3D> > collisions;
-        for (int i = 0; i < siz; i += 4) {
-            Point3D n;
-            pair<bool, double> res = getDisToFace(last, velo_vec, pwall->allface[i], pwall->allface[i + 1], pwall->allface[i + 2]);
-            n = (pwall->allface[i + 1] - pwall->allface[i]) * (pwall->allface[i + 2] - pwall->allface[i]);
-            if (res.first) collisions.push_back(make_pair(res.second, n));
+            vector< pair<double, Point3D> > collisions;
+            for (int i = 0; i < siz; i += 4) {
+                Point3D n;
+                pair<bool, double> res = getDisToFace(last, velo_vec, pwall->allface[i], pwall->allface[i + 1], pwall->allface[i + 2]);
+                n = (pwall->allface[i + 1] - pwall->allface[i]) * (pwall->allface[i + 2] - pwall->allface[i]);
+                if (res.first) collisions.push_back(make_pair(res.second, n));
 
-            res = getDisToFace(last, velo_vec, pwall->allface[i + 2], pwall->allface[i + 3], pwall->allface[i]);
-            n = (pwall->allface[i + 3] - pwall->allface[i + 2]) * (pwall->allface[i] - pwall->allface[i + 2]);
-            if (res.first) collisions.push_back(make_pair(res.second, n));
+                res = getDisToFace(last, velo_vec, pwall->allface[i + 2], pwall->allface[i + 3], pwall->allface[i]);
+                n = (pwall->allface[i + 3] - pwall->allface[i + 2]) * (pwall->allface[i] - pwall->allface[i + 2]);
+                if (res.first) collisions.push_back(make_pair(res.second, n));
+            }
+            if (collisions.size() > 0)
+            {
+                sort(collisions.begin(), collisions.end(), tcmp);
+                return make_pair(false, collisions[0].second);
+            }
         }
-        if (collisions.size() > 0)
+    ```
+
+- 反弹效果的实现
+	- 如上述，我们就完成了碰撞是否发生的检测，检测过后需要实现反弹的效果，这里我们在输出碰撞面的同时，就可以通过面上的点，得到他的法向量$\overrightarrow{n}$ 。假定当前速度向量是$\vec{v}$，则碰撞后满足：
+
+	$$\overrightarrow{v'}=\vec{v}-2\frac{\vec{v}\cdot \vec{n}}{|\vec{n}|}\hat{n}$$
+
+	- 在完成碰撞后，应该沿新的速度向量防线再做一次运动。
+
+    ```cpp
+        Point3D subsao(Point3D vx, Point3D vo)
         {
-            sort(collisions.begin(), collisions.end(), tcmp);
-            return make_pair(false, collisions[0].second);
+            double len = (vx % vo) / vo.length();
+            Point3D diao = vo * (len / vo.length());
+            return vx - diao * 2;
         }
-    }
-```
 
-- 如此我们就完成了碰撞是否发生的检测，检测过后需要实现反弹的效果，这里我们在输出碰撞面的同时，就可以通过面上的点，得到他的法向量$\overrightarrow{n}$ 。假定当前速度向量是$\vec{v}$，则碰撞后满足：$$\overrightarrow{v'}=\vec{v}-2\frac{\vec{v}\cdot \vec{n}}{|\vec{n}|}\hat{n}$$
-
-- 在完成碰撞后，应该沿新的速度向量防线再做一次运动。
-
-```cpp
-    Point3D subsao(Point3D vx, Point3D vo)
-    {
-        double len = (vx % vo) / vo.length();
-        Point3D diao = vo * (len / vo.length());
-        return vx - diao * 2;
-    }
-
-    pair<bool, Point3D> ret = CheckValiPosi(last);
-    if (ret.first == false)
-    {
-        if (sgn((ret.second - Point3D(0, 0, 0)).length())>0)
+        pair<bool, Point3D> ret = CheckValiPosi(last);
+        if (ret.first == false)
         {
-            Point3D newv = subsao(Point3D(velocity), ret.second);
-            bool fg = Position.y <= -0.2;
-            velocity.x = newv.x;
-            velocity.y = newv.y;
-            velocity.z = newv.z;
-            Position += k * velocity;
-            if (fg)velocity = glm::vec3(0);
+            if (sgn((ret.second - Point3D(0, 0, 0)).length())>0)
+            {
+                Point3D newv = subsao(Point3D(velocity), ret.second);
+                bool fg = Position.y <= -0.2;
+                velocity.x = newv.x;
+                velocity.y = newv.y;
+                velocity.z = newv.z;
+                Position += k * velocity;
+                if (fg)velocity = glm::vec3(0);
+            }
+            else
+            {
+                Position = last;
+            }
         }
-        else
-        {
-            Position = last;
-        }
-    }
-```
+    ```
 
 #### 10. 视口中心点对应方块与墙破坏的确定方法
 
@@ -969,3 +980,11 @@
 	![](shot1.png "markdown" "width:600px")
 	![](shot0.png "markdown" "width:600px")
 
+## 四、小组分工
+
++ 我们四个人配合默契，基本是按模块来分工的。
++ 最终报告书写也基本是按照各自写的代码来分配的，详细如下：
+    - 蒋仕彪 （Charpter 2，3，7）
+    - 刘明锐 （Charpter 1，9，10）
+    - 罗炜程 （Charpter 3，5，8）
+    - 王宇晗 （Charpter 4，6）
