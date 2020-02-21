@@ -4,10 +4,10 @@
 
 ## Project Introduction
 + This is the final project for my Computer Graphics course in Zhejiang University.
-+ It's an **interesting game** designed by C++ and OpenGL. The Player are surrounded by walls in the dark, feeling the fear of **Pumpkin Monster** approaching. Just run and jump between the walls! Blow up the walls and kill all Pumpkin Monsters for surviving!
++ It's an **interesting game** designed by C++ and OpenGL. The Player are surrounded by walls in the dark, feeling the fear of **Pumpkin Monster** approaching. Just run and jump , blow up the walls and kill all Pumpkin Monsters for surviving!
 
 ## How to play?
-+ Build up a new VS project and add files from [Resources](https://github.com/jiangshibiao/pumpkinBattle/tree/master/Resources) 
++ Build up a new VS project and add files from [Resources](https://github.com/jiangshibiao/pumpkinBattle/tree/master/Resources).
 + Use the codes in [pumpkinBattle](https://github.com/jiangshibiao/pumpkinBattle/tree/master/pumpkinBattle) to play!
 
 ## Player Instructions
@@ -40,17 +40,27 @@
 
 ## Some Screenshots
 + Game interface
+
 ![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/screenshot0.bmp)
-+ The sky
+
++ The Sky, Walls, Props and Shadow
+
 ![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/skybox1.png)
-+ Walls, Props and Shadow
 ![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/planet.png)
-+ After the contruction of walls
+
++ The contruction of walls
+
 ![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/screenshot1.bmp)
+
 + The flying bullet
+
 ![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/bullet.bmp)
+
 + The pumpkin monsters
+
 ![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/fkwyh2.bmp)
+
 + When the pumpkin monster is hit...
+
 ![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/shot1.bmp)
 ![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/shot0.bmp)
