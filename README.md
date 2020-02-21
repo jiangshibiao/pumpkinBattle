@@ -1,33 +1,56 @@
 ## pumpkinBattle
 
-#### 用户说明
+[This is a detailed Chinese report for the course](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/report.md)
 
-+ 按空格键跳跃，`WASD` 控制移动
-+ 右键炸墙（如果出现一个手榴弹标志），左键发子弹（用来打南瓜）
-+ 南瓜被击中会变红，每个南瓜五条命
-+ 被南瓜抓住后死亡，可以在死亡时攻击它，它被打死后按回车复活
-+ 按 P 截图
+#### Project Introduction
++ This is the final project for my Computer Graphics course in Zhejiang University.
++ It's an **interesting game** designed by C++ and OpenGL. The Player are surrounded by walls in the dark, feeling the fear of **Pumpkin Monster** approaching. Just run and jump between the walls! Blow up the walls and kill all Pumpkin Monsters for surviving!
 
-#### 心路历程
+#### How to play?
++ Build up a new VS project and add files from [Resources](https://github.com/jiangshibiao/pumpkinBattle/tree/master/Resources) 
++ Use the codes in [pumpkinBattle](https://github.com/jiangshibiao/pumpkinBattle/tree/master/pumpkinBattle) to play!
 
-+ 写了很久很久的 CG 大作业，四人车还算稳
-+ 有关这个作业的优点和特色，已经在实验报告里说明
-+ 除了 `learn openGL` 这个教程，没有参考其他任何代码
-+ 一路而来的心路
-    + 本来是想写好好写墙的，比如
-        - 每块砖有一个生命值；敲一块砖后，周围一片受到的伤害会有一个分布
-        - 不同生命值的墙会有不同的贴图
-        - 用 `KDtree` 来加速渲染墙面
-        - 考虑如何处理砖块的物理下落。
-    + 这些点都因为太麻烦/不可做而放弃了……
-    + 一不小心转战成了 FPS 游戏，导入了一些会移动的南瓜怪，右键炸墙左键发射子弹，空格键跳跃……
-+ 代码管理问题
-	+ 因为各种环境的问题，组员之间交互也很麻烦
-	+ 代码架构不太行，写得很乱；当然现代openGL麻烦的渲染方式也有锅
-+ 逐渐立志写一个好玩的东西变成立志踩点
-+ 环境配置方面的 tip
-	+ 感觉自己已经成了环境配置大师了……
-	+ 解决方案属性方面
-        1. 把文件夹里的 `C++ sources` 放到你喜欢的目录下，然后在工程里把 `include` 和 `lib` 的目录导入
-        2. 在链接器里把每个 `lib` 都放进去
-    + 还有一个 `.dll` 要放在对应的 debug/release 目录的 exe 旁边
+#### Player Instructions
++ Use the *space* to jump (You can only jump twice at a time) and use *WASD* to move.
++ Use the *mouse* to control your perspective. 
++ There are several **pumpkin** around you when you start the game. Each pumpkin will wander ramdomly, but the closer you near him, the more possibility that he walks to you. 
++ There's a **grenade sign** when you get close to the wall, and click down the *right button* to blow up a random piece of wall.
++ After you click down the *left button*, you can shoot a **bullet**. Each pumpkin has 5 lives and will disapper after being hit 5 times.
++ You can not move after the pumpkin catches you. Then please shoot him as quickly as possible and  press the *enter* to reborn.
++ Press the *P* on the keyboard to get a screenshot.
+
+#### Brief Technology Introduction
++ Shadow
+	- Know the principle of shadow and light
+	- Control the dynamic light
+	- Control the real-time shadow according to the light
++ Collision
+	- Use the knowledge of 3D-geometry to describe the collision.
+	- Implement it in many situations: bullet and pumpkin monsters, explosive and walls, people and bricks...
++ Models
+	- Master the structure of the model
+	- Import some models from the Internet
++ Texture
+	- Build the texture by programs
+	- Use the textures from the Internet and attach them on the objects
+	- Use the skybox
++ Others
+	- Print real-time words on the screen
+	- Gravity system
+
+#### Some Screenshots
++ Game interface
+![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/screenshot0.bmp)
++ The sky
+(https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/skybox1.png)
++ Walls, Props and Shadow
+![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/planet.png)
++ After the contruction of walls
+![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/screenshot1.bmp)
++ The flying bullet
+![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/bullet.bmp)
++ The pumpkin monsters
+![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/fkwyh2.bmp)
++ When the pumpkin monster is hit...
+![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/shot1.bmp)
+![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/shot0.bmp)
