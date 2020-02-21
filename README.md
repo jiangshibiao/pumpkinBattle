@@ -39,28 +39,22 @@
 	- Gravity system
 
 ## Some Screenshots
-+ Game interface
-
+#### Game interface
 ![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/screenshot0.bmp)
 
-+ The Sky, Walls, Props and Shadow
-
+#### The Sky, Walls, Props and Shadow
 ![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/skybox1.png)
 ![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/planet.png)
 
-+ The contruction of walls
-
+#### The contruction of walls
 ![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/screenshot1.bmp)
 
-+ The flying bullet
+#### The flying bullet
+![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/bullet.png)
 
-![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/bullet.bmp)
-
-+ The pumpkin monsters
-
+#### The pumpkin monsters
 ![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/fkwyh2.bmp)
 
-+ When the pumpkin monster is hit...
-
-![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/shot1.bmp)
-![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/shot0.bmp)
+#### When the pumpkin monster is hit...
+![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/shot1.png)
+![](https://github.com/jiangshibiao/pumpkinBattle/blob/master/ChineseReport/shot0.png)
